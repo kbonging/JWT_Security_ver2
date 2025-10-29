@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nexus.core.user.dao.UserDAO">
+    <resultMap id="UserMap" type="com.nexus.core.user.dto.UserDTO" >
+        <id property="userIdx" column="user_idx"/>
+        <result property="userId" column="user_id"/>
+        <result property="userPw" column="user_pw"/>
+        <result property="isEnabled" column="is_enabled"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+
+        <!--권한 목록-->
+        <collection property="authList" ofType="com.nexus.core.user.dto.UserAuthDTO">
+            <result property="authIdx" column="auth_idx"/>
+            <result property="auth" column="auth"/>
+        </collection>
+    </resultMap>
+
+    <!-- 로그인 시 회원 + 권한 조회 -->
+    <select id="selectByUserId" resultMap="UserMap" parameterType="String">
+        SELECT
+        u.user_idx, u.user_id, u.user_pw, u.is_enabled, u.created_at, u.updated_at,
+        ua.auth_idx, ua.auth
+        FROM user u
+        LEFT JOIN user_auth ua ON u.user_idx = ua.user_idx
+        WHERE u.user_id = #{userId}
+    </select>
+
+</mapper>
