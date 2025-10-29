@@ -17,8 +17,8 @@ Spring Boot + MyBatis + Spring Security + JWT를 사용한 **보안 템플릿 �
   - `ROLE_USER`, `ROLE_ADMIN` 지원
   - `ROLE_USER` 권한이 있어야 접근 가능한 메서드 예시 구현
 - **회원 관리**
-  - 회원 가입 기능 구현 (DB 저장, 유효성 검증 미구현)
-  - 비밀번호는 **BCrypt 암호화** 후 저장
+  - 회원 가입 기능 미구현
+  - 비밀번호는 **BCrypt 암호화** 후 저장 (미구현)
   - 로그인 기능 구현
   - 회원 정보 조회 기능 포함
 - **MyBatis 기반**
